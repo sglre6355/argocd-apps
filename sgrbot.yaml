@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sgrbot
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  project: default
+  sources:
+    - path: manifests
+      repoURL: https://github.com/sglre6355/sgrbot-manifests
+      targetRevision: HEAD
+    - path: applications/sgrbot
+      repoURL: https://github.com/sglre6355/external-secrets-manifests
+      targetRevision: HEAD
+    - path: applications/lavalink
+      repoURL: https://github.com/sglre6355/external-secrets-manifests
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
