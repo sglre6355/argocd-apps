@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: default
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: ~7
+    helm:
+      valuesObject:
+        server:
+          ingress:
+            enabled: true
+            ingressClassName: tailscale
+            hostname: argocd
+            tls: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
