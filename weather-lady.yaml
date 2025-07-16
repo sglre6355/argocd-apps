@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: weather-lady
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: weather-lady=ghcr.io/sglre6355/weather-lady,web-capture=ghcr.io/sglre6355/web-capture
+    argocd-image-updater.argoproj.io/weather-lady.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  project: default
+  sources:
+    - path: manifests/overlays/production
+      repoURL: https://github.com/sglre6355/weather-lady-manifests
+      targetRevision: HEAD
+      kustomize: {}
+    - path: applications/weather-lady
+      repoURL: https://github.com/sglre6355/external-secrets-manifests
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
