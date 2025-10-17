@@ -16,6 +16,11 @@ spec:
     chart: external-secrets
     repoURL: https://charts.external-secrets.io
     targetRevision: ~0
+    helm:
+      valuesObject:
+        serviceAccount:
+          annotations:
+            iam.gke.io/gcp-service-account: external-secrets-operator@sglre6355.iam.gserviceaccount.com
   syncPolicy:
     automated:
       prune: true
