@@ -10,7 +10,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: tailscale-operator
+    namespace: tailscale
   project: default
   source:
     chart: tailscale-operator
