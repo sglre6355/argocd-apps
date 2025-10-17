@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: weather-lady
-  namespace: argocd
+  namespace: argo-cd
   annotations:
     argocd-image-updater.argoproj.io/image-list: weather-lady=ghcr.io/sglre6355/weather-lady,web-capture=ghcr.io/sglre6355/web-capture
     argocd-image-updater.argoproj.io/weather-lady.update-strategy: newest-build

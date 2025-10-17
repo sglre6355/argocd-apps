@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: daily-chinese-teacher
-  namespace: argocd
+  namespace: argo-cd
   annotations:
     argocd-image-updater.argoproj.io/image-list: daily-chinese-teacher=ghcr.io/sglre6355/daily-chinese-teacher
     argocd-image-updater.argoproj.io/daily-chinese-teacher.update-strategy: newest-build
