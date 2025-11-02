@@ -1,0 +1,9 @@
+apiVersion: chisel-operator.io/v1
+kind: ExitNode
+metadata:
+  name: sgr-vcsa01
+  namespace: default
+spec:
+  host: 149.28.20.11
+  port: 3000
+  auth: sgr-vcsa01-chisel
